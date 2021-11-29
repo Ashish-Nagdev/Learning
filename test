@@ -1,0 +1,151 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct 27 14:53:14 2021
+
+@author: Ashish
+"""
+
+
+
+import pyautogui 
+count = 0
+
+
+test_string = """
+\"\"\" select ec.*, ee.*, et.*, ud.* from [V2].[EmaEmotion] ee left join [V2].[EmaCheck] ec on ee.Id = ec.Id left join [V2].[EmaTag] et on ee.Id = et.Id left join [V2].[UserDirectory] ud on ee.UserId = ud.Id
+
+select sd.*,se.* from [V2].[SleepDetails] sd left join [V2].[SleepEntities] se on sd.EntityId=se.Id
+
+select q.*,s.* from [V2].[Questionnaires] q left join [V2].[Scales] s on q.Id=s.QuestionnaireId
+
+select * from [V2].[BodyStressChecks]
+
+select * from [V2].[Events]
+
+select * from [V2].[Breaths]
+
+select * from [V2].[HR]
+
+select * from [V2].[ResearchTests]
+
+select * from [V2].[NormalizationTable]
+
+select top 10 * from [V2].[PedometerData]
+
+select top 10 * from [V2].[StepsHK]
+
+select * from [V2].[StepsHK] union select * from [V2].[StepsLS]
+
+select * from [V2].[MetaEvents]
+
+select * from [V2].[CoachingStates]
+
+select * from [V2].[CoachingFiles]
+
+select * from [V2].[PushTags]
+
+select * from [V2].[Configurations]
+
+select * from [V2].[PedometerData]
+
+select * from [V2].[Firmwares]
+
+select * from [V2].[NormalizationTable]
+
+
+
+question.I am the person who is responsible for taking care of my health..Agree
+question.I am the person who is responsible for taking care of my health..Agree Strongly
+question.I am the person who is responsible for taking care of my health..N/A
+question.Taking an active role in my own health care is the most important thing that affects my health.
+question.Taking an active role in my own health care is the most important thing that affects my health..Disagree Strongly
+question.Taking an active role in my own health care is the most important thing that affects my health..Disagree
+question.Taking an active role in my own health care is the most important thing that affects my health..Agree
+question.Taking an active role in my own health care is the most important thing that affects my health..Agree Strongly
+question.Taking an active role in my own health care is the most important thing that affects my health..N/A
+question.I am confident I can help prevent or reduce problems associated with my health.
+question.I am confident I can help prevent or reduce problems associated with my health..Disagree Strongly
+question.I am confident I can help prevent or reduce problems associated with my health..Disagree
+question.I am confident I can help prevent or reduce problems associated with my health..Agree
+question.I am confident I can help prevent or reduce problems associated with my health..Agree Strongly
+question.I am confident I can help prevent or reduce problems associated with my health..N/A
+question.I know what each of my prescribed medications do.
+question.I know what each of my prescribed medications do..Disagree Strongly
+question.I know what each of my prescribed medications do..Disagree
+question.I know what each of my prescribed medications do..Agree
+question.I know what each of my prescribed medications do..Agree Strongly
+question.I know what each of my prescribed medications do..N/A
+question.I am confident that I can tell whether I need to go to the doctor or whether I can take care of a health problem myself.
+question.I am confident that I can tell whether I need to go to the doctor or whether I can take care of a health problem myself..Disagree Strongly
+question.I am confident that I can tell whether I need to go to the doctor or whether I can take care of a health problem myself..Disagree
+question.I am confident that I can tell whether I need to go to the doctor or whether I can take care of a health problem myself..Agree
+question.I am confident that I can tell whether I need to go to the doctor or whether I can take care of a health problem myself..Agree Strongly
+question.I am confident that I can tell whether I need to go to the doctor or whether I can take care of a health problem myself..N/A
+question.I am confident that I can tell a doctor or nurse concerns I have even when he or she does not ask.
+question.I am confident that I can tell a doctor or nurse concerns I have even when he or she does not ask..Disagree Strongly
+question.I am confident that I can tell a doctor or nurse concerns I have even when he or she does not ask..Disagree
+question.I am confident that I can tell a doctor or nurse concerns I have even when he or she does not ask..Agree
+question.I am confident that I can tell a doctor or nurse concerns I have even when he or she does not ask..Agree Strongly
+question.I am confident that I can tell a doctor or nurse concerns I have even when he or she does not ask..N/A
+question.I am confident that I can carry out medical treatments I may need to do at home.
+question.I am confident that I can carry out medical treatments I may need to do at home..Disagree Strongly
+question.I am confident that I can carry out medical treatments I may need to do at home..Disagree
+question.I am confident that I can carry out medical treatments I may need to do at home..Agree
+question.I am confident that I can carry out medical treatments I may need to do at home..Agree Strongly
+question.I am confident that I can carry out medical treatments I may need to do at home..N/A
+question.I understand my health problems and what causes them.
+question.I understand my health problems and what causes them..Disagree Strongly
+question.I understand my health problems and what causes them..Disagree
+question.I understand my health problems and what causes them..Agree
+question.I understand my health problems and what causes them..Agree Strongly
+question.I understand my health problems and what causes them..N/A
+question.I know what treatments are available for my health problems.
+question.I know what treatments are available for my health problems..Disagree Strongly
+question.I know what treatments are available for my health problems..Disagree
+question.I know what treatments are available for my health problems..Agree
+question.I know what treatments are available for my health problems..Agree Strongly
+question.I know what treatments are available for my health problems..N/A
+question.I have been able to maintain lifestyle changes, like healthy eating or exercising.
+question.I have been able to maintain lifestyle changes, like healthy eating or exercising..Disagree Strongly
+question.I have been able to maintain lifestyle changes, like healthy eating or exercising..Disagree
+question.I have been able to maintain lifestyle changes, like healthy eating or exercising..Agree
+question.I have been able to maintain lifestyle changes, like healthy eating or exercising..Agree Strongly
+question.I have been able to maintain lifestyle changes, like healthy eating or exercising..N/A
+question.I know how to prevent problems with my health.
+question.I know how to prevent problems with my health..Disagree Strongly
+question.I know how to prevent problems with my health..Disagree
+question.I know how to prevent problems with my health..Agree
+question.I know how to prevent problems with my health..Agree Strongly
+question.I know how to prevent problems with my health..N/A
+question.I am confident I can work out solutions when new problems arise with my health.
+question.I am confident I can work out solutions when new problems arise with my health..Disagree Strongly
+question.I am confident I can work out solutions when new problems arise with my health..Disagree
+question.I am confident I can work out solutions when new problems arise with my health..Agree
+question.I am confident I can work out solutions when new problems arise with my health..Agree Strongly
+question.I am confident I can work out solutions when new problems arise with my health..N/A
+question.I am confident that I can maintain lifestyle changes, like healthy eating and exercising, even during times of stress.
+question.I am confident that I can maintain lifestyle changes, like healthy eating and exercising, even during times of stress..Disagree Strongly
+question.I am confident that I can maintain lifestyle changes, like healthy eating and exercising, even during times of stress..Disagree
+question.I am confident that I can maintain lifestyle changes, like healthy eating and exercising, even during times of stress..Agree
+question.I am confident that I can maintain lifestyle changes, like healthy eating and exercising, even during times of stress..Agree Strongly
+question.I am confident that I can maintain lifestyle changes, like healthy eating and exercising, even during times of stress..N/A
+question.I am confident that I can maintain lifestyle changes, like healthy eating and exercising, even during 
+
+
+\"\"\"
+"""
+
+count = 0
+
+res = test_string.split()  
+    
+# printing result  
+print ("\nThe words of string are") 
+for i in res: 
+    pyautogui.typewrite(i + " ", interval=0.950)
+#while count < 10000:
+#    pyautogui.typewrite('\ns = \'Hello world!\'', interval=0.50)
+    count = count + 1
+    
+print(count)
+
